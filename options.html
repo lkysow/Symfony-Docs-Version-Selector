@@ -1,0 +1,43 @@
+<html>
+<head>
+  <style type="text/css">
+    .wrapper {
+      height: 30px;
+      width: 220px;
+    }
+    .title {
+      font-weight: bold;
+    }
+    .options {
+      margin-top: 10px;
+    }
+    .options, .wrapper {
+      font-family: sans-serif;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <span class="title">Symfony Docs Version Selector</span>
+    <table class="options">
+      <tr>
+        <td>Enabled:</td>
+        <td><input type="checkbox" id="enabled" checked></td>
+      </tr>
+      <tr>
+        <td>Version:</td>
+        <td>
+          <select id="version">
+            <option value="2.0">2.0</option>
+            <option value="2.1">2.1</option>
+            <option value="current">current (2.2)</option>
+            <option value="master">master</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+ </div>
+</body>
+<script src="options.js"></script>
+</html>

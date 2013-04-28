@@ -3,13 +3,14 @@ var requiredVersion = DEFAULT_VERSION;
 var enabled = true;
 
 /*
- * The first capture group gets everything before the docs version, the second the docs version
- * the third everything after.
+ * The first capture group gets everything before the docs version, the third the docs version
+ * the fourth everything after.
  *
  * Notes: - Requests to www.symfony.com will receive a 301 redirect to symfony.com, so only hook into naked domain request
- *        - The .*? after symfony.com is because of localized docs, ex. symfony.com/fr/doc
+ *        - The (?!/legacy)(/.{2})? after symfony.com makes sure to not match legacy docs, ex. symfony.com/legacy
+            and still matches localized docs, ex. symfony.com/fr/doc
  */
-var docVersionRegex = new RegExp("(http://symfony.com.*?/doc/)(.+?)(/.*)");
+var docVersionRegex = new RegExp("(http://symfony.com(?!/legacy)(/.{2})?/doc/)(.+?)(/.*)");
 
 var initializeVersion = function () {
   chrome.storage.sync.get("version", function (items) {
@@ -44,7 +45,7 @@ var addOptionsChangeListener = function () {
 var addRequestListener = function () {
   chrome.webRequest.onBeforeRequest.addListener(function (details) {
     if (enabled) {
-      var newUrl = details.url.replace(docVersionRegex, "$1" + requiredVersion + "$3");
+      var newUrl = details.url.replace(docVersionRegex, "$1" + requiredVersion + "$4");
       if (newUrl != details.url) {
         return { redirectUrl: newUrl }
       }  

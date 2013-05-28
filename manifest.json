@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Symfony Docs Version Selector",
   "description": "Select your Symfony documentation version. Will redirect all requests to correct version.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "icons": {
     "16": "images/icon-16.png",
     "48": "images/icon-48.png",
